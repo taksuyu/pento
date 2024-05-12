@@ -1,5 +1,9 @@
 # Pento
 
+This project follows along the [Programming Phoenix LiveView Book available at The Pragmatic Bookshelf][1]
+
+## Phoenix
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
@@ -16,3 +20,5 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+[1]: https://pragprog.com/titles/liveview/programming-phoenix-liveview/
