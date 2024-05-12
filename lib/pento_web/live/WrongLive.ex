@@ -13,6 +13,7 @@ defmodule PentoWeb.WrongLive do
     </h1>
     <h2>
       <%= @message %>
+      It's <%= time() %>
     </h2>
     <br>
     <h2>
@@ -28,6 +29,10 @@ defmodule PentoWeb.WrongLive do
     <% end %>
     </h2>
     """
+  end
+
+  def time() do
+    DateTime.utc_now |> to_string()
   end
 
   def handle_event("guess", %{"number" => guess}, socket) do
