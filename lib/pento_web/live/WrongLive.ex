@@ -7,39 +7,37 @@ defmodule PentoWeb.WrongLive do
 
   def render(assigns) do
     ~H"""
-      <h1 class="mb-4 text-4xl font-extrabold">
-        Your score: <%= @score %>
-      </h1>
-      <h2>
-        <%= @message %> It's <%= @time %>
-      </h2>
-      <br />
-      <h2>
-        <%= if @correct_number == @guess do %>
-          <div class="pb-8">
-            Congratulations!
-            <.link
-              patch="#"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
-            >
-              Play again?
-            </.link>
-          </div>
-        <% end %>
+    <h1 class="mb-4 text-4xl font-extrabold">
+      Your score: <%= @score %>
+    </h1>
+    <h2>
+      <%= @message %> It's <%= @time %>
+    </h2>
+    <br />
+    <h2>
+      <div :if={@correct_number == @guess} class="pb-8">
+        Congratulations!
+        <.link
+          patch="#"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
+        >
+          Play again?
+        </.link>
+      </div>
 
-        <div>
-          <%= for n <- @range do %>
-            <.link
-              href="#"
-              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
-              phx-click="guess"
-              phx-value-number={n}
-            >
-              <%= n %>
-            </.link>
-          <% end %>
-        </div>
-      </h2>
+      <div>
+        <%= for n <- @range do %>
+          <.link
+            href="#"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded m-1"
+            phx-click="guess"
+            phx-value-number={n}
+          >
+            <%= n %>
+          </.link>
+        <% end %>
+      </div>
+    </h2>
     """
   end
 
@@ -64,12 +62,12 @@ defmodule PentoWeb.WrongLive do
         [message: "Your guess: #{guess}. You are correct!"]
       end
 
-    {
-      :noreply,
+    socket =
       assign(socket, changes)
       |> assign(:guess, guess_int)
       |> assign_time()
-    }
+
+    {:noreply, socket}
   end
 
   def reset_game(socket) do
